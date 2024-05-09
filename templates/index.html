@@ -12,6 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     {% comment %} bootstrap icon link {% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    {% comment %} jquery link {% endcomment %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
     {% comment %} custom css {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     {% block style %} {% endblock style %}
@@ -29,7 +31,7 @@
                     </div>
                     <div class="col-9 ms-4">
                         <h3>Welcome Back</h3>
-                        <h1>John Doe</h1>
+                        <h1>{{ name }}</h1>
                         <p>@johndoe</p>
                     </div>
                 </div>
@@ -47,7 +49,7 @@
                 </div>
                 <div class="row my-5">
                     <div class="col-6">
-                        Analytics
+                      <canvas data-labels="{{ labels }}"  data-chart_dat="{{ chart_data }}" id="chart"></canvas>
                     </div>
                     <div class="col-6">
                         <div class="row text-center">
@@ -55,21 +57,21 @@
                               <div class="personal-info-icon borde w-100">
                                 <i class="bi bi-heart-fill"></i>
                               </div>
-                              <p>120</p>
+                              <p>{{ total_likes }}</p>
                                 <h6>Likes</h6>
                             </div>
                             <div class="col-4">
                               <div class="personal-info-icon w-100">
                                 <i class="bi bi-share-fill"></i>
                               </div>
-                              <p>50</p>
+                              <p>{{ total_share }}</p>
                                 <h6>Shares</h6>
                             </div>
                             <div class="col-4">
                               <div class="personal-info-icon w-100">
                                 <i class="bi bi-chat-left-fill"></i>
                               </div>
-                              <p>20</p>
+                              <p>{{ total_comments }}</p>
                                 <h6>Comments</h6>
                             </div>
                         </div>
@@ -124,5 +126,47 @@
     </div>
     {% block content %}
     {% endblock content %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
+  
+    <script> 
+      const reconstructStringJSON = (str) => {
+        const jsonString = str.replace(/'/g, '"') // Ganti single quote dengan double quote
+        const jsonArray = JSON.parse(jsonString)
+        return jsonArray
+    }
+
+      let getChart = document.getElementById("chart");
+      const chart_draw = getChart.getContext("2d");
+      let labels = getChart.getAttribute("data-labels")
+      let chart_data = getChart.getAttribute("data-chart_dat")
+      labels = reconstructStringJSON(labels)
+      chart_data = reconstructStringJSON(chart_data)
+      console.log(labels)
+      console.log(chart_data)
+      let chart = new Chart(chart_draw, {
+        type: "bar",
+        data: {
+          labels: labels,
+           datasets: [
+              {
+                label: "Jumlah Subscribers",
+                backgroundColor: "#79AEC8",
+                borderColor: "#417690",
+                data: chart_data,
+              }
+           ]
+        },
+        options: {
+           title: {
+              text: "Total Subscribers 4 Minggu Terakhir",
+              display: true
+           }
+        }
+      });
+    
+    </script> 
+    {% block script %}
+    {% endblock script %}
 </body>
 </html>
