@@ -1,0 +1,11 @@
+:root{
+    --sidebar-blue: #79AEC8;
+}
+.custom-link-css{
+    text-decoration: none;
+    color: black;
+}
+.custom-link-css:hover{
+    font-weight: 500;
+    color: var(--sidebar-blue);
+}

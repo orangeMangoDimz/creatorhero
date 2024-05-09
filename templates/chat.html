@@ -1,0 +1,55 @@
+{% extends 'partial/base.html' %}
+
+{% block title %}
+    Chat
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-3 border-end border-1 border-black me-5">
+        <h3>Suggestion</h3>
+        <div class="row my-3">
+            <div class="col-3">
+                <img src="" alt="">
+            </div>
+            <div class="col-9">
+                <h5>Account Name</h5>
+                <p>@accountname</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="row" style="max-height: 100px; max-width: auto;">
+            <div class="d-flex">
+                <img src="" alt="">
+                <h4>Account Name</h4>
+            </div>
+        </div>
+        <div class="row my-3" id="chat_container">
+        <ul id='chat_messages' class="flex flex-col justify-end gap-2 p-4">
+            {% for message in chat_messages reversed %}
+           {% include 'partial/chat_messages.html' %}
+            {% endfor %}
+        </ul>
+        <div class="sticky bottom-0 z-10 p-2 bg-gray-800">
+            <div class="flex items-center rounded-xl px-2 py-2">
+                <form id="chat_message_form" class="w-full" hx-post="{% url 'chat:index' %}" hx-target="#chat_messages" hx-swap="beforeend" _="on htmx:afterRequest reset() me">
+                    {% csrf_token %}
+                    {{ form }}
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    const scrollToBottom = () => {
+        const container = document.getElementById('chat_container');
+        container.scrollTop = container.scrollHeight;
+    }
+    scrollToBottom();
+  </script>
+{% endblock script %}
