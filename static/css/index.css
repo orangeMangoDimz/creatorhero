@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --blue: #5C9BF5;
+  --white: #fff;
+  --red: #CC0020;
+  --darkBlue: #042F;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 1.15rem;
+    font-family: "Poppins", sans-serif;
+}
+  .row{
+      --bs-gutter-x: 0 !important;
+  }
+  #strengthBtn{
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 600;
+}
+#weaknessBtn{
+    background-color: var(--red);
+    color: var(--white);
+    font-weight: 600;
+}
+#todoBtn{
+    background-color: var(--darkBlue);
+      color: var(--white);
+      font-weight: 600;
+  }
+  .personal-info-icon{
+    width: 50px;
+    height: 50px;
+  }
+  #img-profile{
+    height: 200px;
+    width: 200px;
+    background-size: cover;
+    background-position: center;
+  }
