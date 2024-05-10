@@ -6,12 +6,17 @@
         </div>
         <h3>Creatorhero</h3>
     </section>
+    {% if user.is_authenticated %}
     <section class="d-flex justify-content-center gap-3">
-        <a href="{% url 'user:login' %}" class="btn btn-outline-dark">
-            Login
-        </a>
         <a href="{% url 'user:logout' %}" class="btn btn-outline-dark">
             Logout
         </a>
     </section>
+    {% else %}
+    <section class="d-flex justify-content-center gap-3">
+        <a href="{% url 'user:login' %}" class="btn btn-outline-dark">
+            Login
+        </a>
+    </section>
+    {% endif %}
 </header>

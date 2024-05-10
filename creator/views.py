@@ -6,6 +6,7 @@ def index(request):
     labels = get_four_previous_weeks_date()
     chart_label = "Weekly subscribers"
     chart_data = get_subs_for_last_four_weeks()
+    strength, weakness, to_do = get_analytics_restls()
     context = {
         "name": csv_data["Name"][0],
         "username": csv_data["username"][0],
@@ -14,6 +15,9 @@ def index(request):
         "total_comments": csv_data["Total comments"][0],
         "labels": labels,
         "chart_label": chart_label,
-        "chart_data": chart_data
+        "chart_data": chart_data,
+        "strength": strength,
+        "weakness": weakness,
+        "to_do": to_do
     }
     return render(request, "index.html", context)
