@@ -19,29 +19,35 @@
         </div>
     </div>
     <div class="col-8">
-        <div class="row" style="max-height: 100px; max-width: auto;">
-            <div class="d-flex">
-                <img src="" alt="">
-                <h4>Account Name</h4>
+        <div class="card" id="chat1" style="border-radius: 15px;">
+            <div
+                class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <i class="fas fa-angle-left"></i>
+                <p class="mb-0 fw-bold">Account Name</p>
+                <i class="fas fa-times"></i>
             </div>
-        </div>
-        <div class="row my-3" id="chat_container">
-        <ul id='chat_messages' class="flex flex-col justify-end gap-2 p-4">
-            {% for message in chat_messages reversed %}
-           {% include 'partial/chat_messages.html' %}
-            {% endfor %}
-        </ul>
-        <div class="sticky bottom-0 z-10 p-2 bg-gray-800">
-            <div class="flex items-center rounded-xl px-2 py-2">
-                <form id="chat_message_form" class="w-full" hx-post="{% url 'chat:index' %}" hx-target="#chat_messages" hx-swap="beforeend" _="on htmx:afterRequest reset() me">
-                    {% csrf_token %}
-                    {{ form }}
-                </form>
+            <div class="card-body" id="chat_container">
+                <ul id="chat_messages">
+                    {% for message in chat_messages reversed %}
+                    {% include 'partial/chat_messages.html' %}
+                    {% endfor %}
+                    <div class="sticky bottom-0 z-10 p-2 bg-gray-800">
+                        <div class="form-outline flex items-center rounded-xl px-2 py-2">
+                            <form id="chat_message_form" class="w-full" method="POST">
+                                {% for field in form %}
+                                {% csrf_token %}
+                                {{ field }}
+                                {% endfor %}
+                            </form>
+                        </div>
+                    </div>
+                </ul>
             </div>
-        </div>
         </div>
     </div>
 </div>
+
 {% endblock content %}
 
 {% block script %}
@@ -51,5 +57,5 @@
         container.scrollTop = container.scrollHeight;
     }
     scrollToBottom();
-  </script>
+  </script> 
 {% endblock script %}

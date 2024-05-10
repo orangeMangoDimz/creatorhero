@@ -19,8 +19,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",
-    "channels",
+    "django_htmx",
+    # "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -31,9 +31,8 @@ INSTALLED_APPS = [
     "chat",
 ]
 
-ASGI_APPLICATION = 'creatorhero.asgi.application'
-
 MIDDLEWARE = [
+    "django_htmx.middleware.HtmxMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -62,6 +61,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "creatorhero.wsgi.application"
+# ASGI_APPLICATION = 'creatorhero.asgi.application'
 
 
 # Database
