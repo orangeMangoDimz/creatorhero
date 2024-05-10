@@ -1,5 +1,6 @@
 :root{
     --sidebar-blue: #79AEC8;
+    --white: #fff;
 }
 .custom-link-css{
     text-decoration: none;
@@ -8,4 +9,8 @@
 .custom-link-css:hover{
     font-weight: 500;
     color: var(--sidebar-blue);
+}
+.sidebar-container{
+    background-color: var(--sidebar-blue);
+    color: var(--white)
 }

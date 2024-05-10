@@ -74,6 +74,9 @@ def get_analytics_restls():
         strength, weakness, to_do = predict_subscribers(hari_ke, jumlah_subscribers, strength, weakness, to_do)
         strength, weakness, to_do = clustering_subscribers(hari_ke, jumlah_subscribers, strength, weakness, to_do)
         
+        if len(weakness) == 0:
+            weakness.append("Tidak ada yang perlu dikhawatirkan, kamu sudah melakukan yang terbaik!")
+        
         return strength, weakness, to_do
     except Exception as e:
         print("Error reading csv file: ", e)
