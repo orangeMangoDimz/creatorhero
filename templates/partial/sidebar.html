@@ -1,15 +1,25 @@
 {% load static %}
-<div class="col-3">
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock style %}
+
+{% load static %}
+<section class="col-2 border-end border-1 border-black pe-3 me-5">
   <div class="my-3">
     <div class="d-flex gap-3">
         <i class="bi bi-house"></i>
+        <a href="{% url 'creator:index' %}" class="custom-link-css">
         <h5>Dashboard</h5>
+        </a>
       </div>
   </div>
   <div class="my-3">
     <div class="d-flex gap-3">
       <i class="bi bi-chat-square-dots"></i>
-      <h5>chat</h5>
+      <a href="{% url 'chat:index' %}" class="custom-link-css">
+      <h5>Collaboraiton</h5>
+      </a>
     </div>
   </div>
   <div class="my-3">
@@ -24,4 +34,4 @@
       <h5>Sugested Creator</h5>
     </div>
   </div>
-</div>
+</section>

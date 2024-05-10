@@ -1,0 +1,63 @@
+{% extends 'partial/base.html' %}
+
+{% block title %}
+    Chat
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-3 border-end border-1 border-black me-5">
+        <h3>Suggestion</h3>
+        <div class="row my-3">
+            <div class="col-3">
+                <div style="width=70px; height: 70px;">
+                    <img style="width=100%; height: 100%" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="">
+                </div>
+            </div>
+            <div class="col-9">
+                <h5>Abraham</h5>
+                <p>@abraham</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="card" id="chat1" style="border-radius: 15px;">
+            <div
+                class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <i class="fas fa-angle-left"></i>
+                <p class="mb-0 fw-bold">Abraham</p>
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="card-body" id="chat_container">
+                <ul id="chat_messages">
+                    {% for message in chat_messages reversed %}
+                    {% include 'partial/chat_messages.html' %}
+                    {% endfor %}
+                    <div class="sticky bottom-0 z-10 p-2 bg-gray-800">
+                        <div class="form-outline flex items-center rounded-xl px-2 py-2">
+                            <form id="chat_message_form" class="w-full" method="POST">
+                                {% for field in form %}
+                                {% csrf_token %}
+                                {{ field }}
+                                {% endfor %}
+                            </form>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    const scrollToBottom = () => {
+        const container = document.getElementById('chat_container');
+        container.scrollTop = container.scrollHeight;
+    }
+    scrollToBottom();
+  </script> 
+{% endblock script %}
